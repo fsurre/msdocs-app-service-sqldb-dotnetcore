@@ -11,7 +11,6 @@ if(builder.Environment.IsDevelopment())
 }
 else
 {
-    AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
      builder.Services.AddDbContext<MyDatabaseContext>(options =>
          options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
      builder.Services.AddStackExchangeRedisCache(options =>
@@ -20,6 +19,11 @@ else
      options.InstanceName = "SampleInstance";
      });
 }
+
+// Add Npgsql.EnableLegacyTimestampBehavior and Npgsql.DisableDateTimeInfinityConversions in DbContext
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
