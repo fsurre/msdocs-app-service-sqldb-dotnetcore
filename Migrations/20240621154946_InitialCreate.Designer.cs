@@ -34,7 +34,7 @@ namespace DotNetCoreSqlDb.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
                     b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("date");
+                        .HasColumnType("timestamptz");
 
                     b.Property<string>("Description")
                         .HasColumnType("varchar");
