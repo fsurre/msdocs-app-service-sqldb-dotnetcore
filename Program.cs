@@ -11,6 +11,7 @@ if(builder.Environment.IsDevelopment())
 }
 else
 {
+    AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
      builder.Services.AddDbContext<MyDatabaseContext>(options =>
          options.UseNpgsql(builder.Configuration.GetConnectionString("AZURE_POSTGRESQL_CONNECTIONSTRING")));
      builder.Services.AddStackExchangeRedisCache(options =>
